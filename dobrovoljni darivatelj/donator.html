@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doniraj Krv - Spasi Život</title>
+  <style>
+    /* Vaš stil ovdje */
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+
+    header {
+      background-color: #e74c3c;
+      color: #fff;
+      text-align: center;
+      padding: 1em;
+    }
+
+    section {
+      max-width: 800px;
+      margin: 2em auto;
+      padding: 1em;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #e74c3c;
+    }
+
+    p {
+      line-height: 1.6;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 1em;
+    }
+
+    label {
+      margin-bottom: 0.5em;
+      display: block;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.5em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #e74c3c;
+      color: #fff;
+      padding: 0.5em; /* Smanjili smo veličinu gumba */
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%; /* Dodali smo širinu 100% kako bi gumbe učinili iste veličine */
+    }
+
+    .hide {
+      display: none;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between; /* Postavljamo prostor između gumba */
+      margin-bottom: 1em; /* Dodali smo marginu ispod gumba */
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1em;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Doniraj Krv - Spasi Život</h1>
+  </header>
+
+  <section>
+    <h2>Zašto Donirati Krv?</h2>
+    <p>Doniranje krvi može spasiti živote. Tvoja mala gesta može napraviti veliku razliku. Saznaj više o procesu doniranja i kako pomažeš zajednici.</p>
+
+    <h2>Kako Donirati Krv?</h2>
+    <p>Doniranje krvi je jednostavno i sigurno. Prijavi se na našem kalendaru donacija i saznaj kada je sljedeća prilika da pomogneš.</p>
+
+    <h2>Kontakt</h2>
+    <p>Za dodatne informacije, kontaktiraj nas na donacije@donirajkrv.org ili nazovi nas na (+385) 976051968.</p>
+  </section>
+
+  <section id="login-registration-section" style="margin-bottom: 4em;">
+    <div class="button-container">
+      <button onclick="showLoginForm()">Log In</button>
+      <button onclick="showRegistrationForm()">Registracija</button>
+    </div>
+
+    <section id="log-in-section" class="hide">
+      <h2>Log In</h2>
+      <form id="log-in-form" action="profil.html" method="post">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Šifra:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Prijavi se</button>
+      </form>
+    </section>
+
+    <section id="registration-section" class="hide">
+      <h2>Registracija</h2>
+      <form id="registration-form" action="profil.html" method="post" onsubmit="return validateRegistrationForm()">
+        <label for="ime">Ime:</label>
+        <input type="text" id="ime" name="ime" required>
+
+        <label for="prezime">Prezime:</label>
+        <input type="text" id="prezime" name="prezime" required>
+
+        <label for="email-reg">Email:</label>
+        <input type="email" id="email-reg" name="email-reg" required>
+
+        <label for="telefon">Telefon:</label>
+        <input type="tel" id="telefon" name="telefon" required>
+
+        <label for="datum">Datum rođenja:</label>
+        <input type="date" id="datum" name="datum" required>
+
+        <label for="password-reg">Šifra:</label>
+        <input type="password" id="password-reg" name="password-reg" required>
+
+        <label for="password-reg-confirm">Potvrdi Šifru:</label>
+        <input type="password" id="password-reg-confirm" name="password-reg-confirm" required>
+
+        <button type="submit">Registriraj se</button>
+      </form>
+    </section>
+  </section>
+
+  <footer>
+    &copy; 2024 Doniraj Krv - Spasi Život
+  </footer>
+
+  <script>
+    function showLoginForm() {
+      document.getElementById('log-in-section').classList.remove('hide');
+      document.getElementById('registration-section').classList.add('hide');
+    }
+
+    function showRegistrationForm() {
+      document.getElementById('log-in-section').classList.add('hide');
+      document.getElementById('registration-section').classList.remove('hide');
+    }
+
+    function checkPasswordMatch() {
+      var password = document.getElementById('password-reg').value;
+      var confirmPassword = document.getElementById('password-reg-confirm').value;
+
+      if (password !== confirmPassword) {
+        alert('Šifra i ponovni unos šifre nisu jednaki.');
+        return false;
+      }
+
+      return true;
+    }
+
+    function validateRegistrationForm() {
+      return checkPasswordMatch();
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dobrovoljni darivatelj</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+
+    header {
+      background-color: #e74c3c;
+      color: #fff;
+      text-align: center;
+      padding: 1em;
+    }
+
+    section {
+      max-width: 800px;
+      margin: 2em auto;
+      padding: 1em;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #e74c3c;
+    }
+
+    p {
+      line-height: 1.6;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 1em;
+      border-collapse: collapse;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 1em;
+      text-align: center;
+    }
+
+    th {
+      background-color: #e74c3c;
+      color: #fff;
+    }
+
+    .donation-form {
+      margin-top: 1em;
+    }
+
+    .donation-form label {
+      display: block;
+      margin-bottom: 0.5em;
+    }
+
+    .donation-form input {
+      width: 100%;
+      padding: 0.5em;
+      margin-bottom: 1em;
+    }
+
+    .donation-form button {
+      background-color: #e74c3c;
+      color: #fff;
+      padding: 0.8em;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .next-donation-date {
+      margin-top: 1em;
+    }
+
+    footer {
+      background-color: #b52626;
+      color: #fff;
+      text-align: center;
+      padding: 1em;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    /* Stilizacija za skočni prozor s informacijama */
+    #infoButton {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #e74c3c;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #infoModal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 80%;
+      max-height: 80%;
+      overflow: auto;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+    }
+
+    #infoModalContent {
+      padding: 20px;
+    }
+
+    #infoModalContent h2 {
+      color: #e74c3c;
+    }
+
+    /* Dodano zatvaranje klikom van prozora */
+    #infoModalClose {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 18px;
+      color: #e74c3c;
+      cursor: pointer;
+    }
+  </style>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <!-- Date.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
+  <!-- Tawk.to live chat -->
+  <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+      s1.async=true;
+      s1.src='https://embed.tawk.to/65b3a3be0ff6374032c53139/1hl2rf8gm';
+      s1.charset='UTF-8';
+      s1.setAttribute('crossorigin','*');
+      s0.parentNode.insertBefore(s1,s0);
+    })();
+  </script>
+</head>
+<body>
+
+<header>
+  <h1>Dobrovoljni darivatelj</h1>
+</header>
+
+<section>
+  <h2>Tablica kompatibilnosti krvnih grupa</h2>
+  <table>
+    <tr>
+        <th>Donor \ Primatelj</th>
+        <th>A+</th>
+        <th>A-</th>
+        <th>B+</th>
+        <th>B-</th>
+        <th>AB+</th>
+        <th>AB-</th>
+        <th>O+</th>
+        <th>O-</th>
+      </tr>
+      <tr>
+        <td>A+</td>
+        <td>Da</td>
+        <td>Ne</td>
+        <td>Ne</td>
+        <td>Ne</td>
+        <td>Da</td>
+        <td>Ne</td>
+        <td>Ne</td>
+        <td>Ne</td>
+      </tr>
+      <tr>
+        <td>A-</td>
+        <td>Da</td>
+        <td>Da</td>
+        <td>Ne</td>
+        <td>Ne</td>
+        <td>Da</td>
+        <td>Da</td>
+        <td>Ne</td>
+        <td>Ne</td>
+      </tr>
+      <tr>
+        <td>B+</td>
+        <td>Ne</td>
+        <td>Ne</td>
+        <td>Da</td>
+        <td>Ne</td>
+        <td>Da</td>
+        <td>Ne</td>
+        <td>Ne</td>
+        <td>Ne</td>
+      </tr>
+      <tr>
+        <td>B-</td>
+        <td>Ne</td>
+        <td>Ne</td>
+        <td>Da</td>
+        <td>Da</td>
+        <td>Da</td>
+        <td>Da</td>
+        <td>Ne</td>
+        <td>Ne</td>
+      </tr>
+      <tr>
+        <td>AB+</td>
+        <td>Ne</td>
+        <td>Ne</td>
+        <td>Ne</td>
+        <td>Ne</td>
+        <td>Da</td>
+        <td>Ne</td>
+        <td>Ne</td>
+        <td>Ne</td>
+      </tr>
+      <tr>
+        <td>AB-</td>
+        <td>Ne</td>
+        <td>Ne</td>
+        <td>Ne</td>
+        <td>Ne</td>
+        <td>Da</td>
+        <td>Da</td>
+        <td>Ne</td>
+        <td>Ne</td>
+      </tr>
+      <tr>
+        <td>O+</td>
+        <td>Da</td>
+        <td>Da</td>
+        <td>Da</td>
+        <td>Da</td>
+        <td>Da</td>
+        <td>Da</td>
+        <td>Da</td>
+        <td>Ne</td>
+      </tr>
+      <tr>
+        <td>O-</td>
+        <td>Da</td>
+        <td>Da</td>
+        <td>Da</td>
+        <td>Da</td>
+        <td>Da</td>
+        <td>Da</td>
+        <td>Da</td>
+        <td>Da</td>
+      </tr>
+  </table>
+
+  <h2>Unos datuma darivanja</h2>
+  <form id="donationForm" class="donation-form">
+    <label for="donationDate">Datum darivanja:</label>
+    <input type="date" id="donationDate" name="donationDate" required>
+    <button type="submit">Spremi datum</button>
+  </form>
+  
+  <p class="next-donation-date" id="nextDonationDate">Datum sljedećeg darivanja: </p>
+  
+  <h2>Prethodni datumi darivanja</h2>
+  <ul id="previousDonationDates"></ul>
+</section>
+
+<footer>
+  &copy; 2024 Doniraj Krv - Spasi Život | Posjetite <a href="https://www.hck.hr/" target="_blank">Hrvatski Crveni križ</a>
+</footer>
+
+<!-- Gumb i skočni prozor s informacijama -->
+<div id="infoButton">Informacije</div>
+
+<div id="infoModal">
+  <div id="infoModalContent">
+    <div id="infoModalClose" onclick="document.getElementById('infoModal').style.display='none';">&times;</div>
+    <h2>Informacije o davanju krvi</h2>
+    <p><strong>Dva su načina na koja dobrovoljni davatelji krvi mogu dati krv:</strong> klasično davanje i davanje posredstvom staničnog separatora. Klasični način davanja krvi podrazumijeva davanje jedne doze krvi od 450 mililitara. Davanje krvi pomoću staničnog separatora podrazumijeva uzimanje jednog ili više krvnih sastojaka. Klasični način davanja krvi traje od osam do 12 minuta, a davanje posredstvom staničnog separatora, ovisno o krvnom sastojku koji osoba daruje, traje od 30 do 90 minuta.</p>
+    
+    <p><strong>Može li osoba davanjem krvi oboljeti od AIDS-a?</strong></p>
+    <p>Davanjem krvi ne može se oboljeti od AIDS-a ni od bilo koje druge bolesti. Pribor koji se koristi prilikom uzimanja krvi je zapakiran, sterilan i namijenjen za jednokratnu uporabu.</p>
+
+    <p><strong>Može li davanje krvi biti štetno za ljudsko zdravlje?</strong></p>
+    <p>Zdravi organizam uvijek raspolaže dovoljnom količinom krvi (oko 5 litara) i davanje ne može biti štetno za ljudsko zdravlje. Dobrovoljnim davanjem krvi ujedno kontroliramo naše zdravlje. Prilikom svakog davanja krvi, davatelj prolazi liječnički pregled tijekom kojega se kontrolira razina željeza u krvi, krv se testira na AIDS, hepatitis B, C te sifilis. Također, određuje se i pripadnost krvnoj grupi (A, B, AB, O, svaka može biti Rh + ili Rh -).</p>
+
+    <p><strong>Treba li jesti prije davanja krvi?</strong></p>
+    <p>Nije poželjno biti natašte. Preporuča se lagani obrok nekoliko sati prije davanja krvi. Zbog bolesnika koji će primiti darovanu krv ne preporuča se jesti izrazito masnu hranu ili piti alkohol osam sati prije davanja krvi.</p>
+
+    <p><strong>Treba li se nakon davanja krvi nešto pojesti i popiti?</strong></p>
+    <p>Uobičajeno je nakon davanja krvi osvježiti se laganim obrokom i bezalkoholnim pićem. Tijekom tog vremena davatelj krvi je pod nadzorom djelatnika ili volonterima Crvenog križa.</p>
+
+    <!-- Dodano zatvaranje klikom van prozora -->
+    <div style="text-align: right; margin-top: 20px; cursor: pointer;" onclick="document.getElementById('infoModal').style.display='none';">Zatvori</div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    var lastDonationDate;
+    
+    // Dohvati prethodne datume iz lokalne pohrane
+    var previousDonationDates = JSON.parse(localStorage.getItem('donationDates')) || [];
+
+    // Prikazi prethodne datume
+    displayPreviousDonationDates();
+
+    $('form').submit(function(e) {
+      e.preventDefault();
+
+      // Dohvati odabrani datum
+      var selectedDate = new Date($('#donationDate').val());
+
+      // Spremi datum zadnjeg darivanja
+      lastDonationDate = selectedDate;
+
+      // Dodaj datum u listu prethodnih datuma
+      previousDonationDates.push(selectedDate.toISOString());
+      
+      // Spremi listu prethodnih datuma u lokalnu pohranu
+      localStorage.setItem('donationDates', JSON.stringify(previousDonationDates));
+
+      // Prikazi datum sljedećeg darivanja
+      var eightyFiveDaysLater = selectedDate.clone().add(85).days();
+      $('#nextDonationDate').text('Datum sljedećeg darivanja: ' + eightyFiveDaysLater.toLocaleDateString());
+
+      // Prikazi prethodne datume
+      displayPreviousDonationDates();
+    });
+
+    // Prikazi skočni prozor s informacijama
+    $('#infoButton').click(function() {
+      $('#infoModal').css('display', 'block');
+    });
+
+    // Zatvaranje skočnog prozora klikom van prozora
+    $(window).click(function(event) {
+      var modal = document.getElementById('infoModal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    function displayPreviousDonationDates() {
+      var $previousDonationDates = $('#previousDonationDates');
+      $previousDonationDates.empty();
+
+      for (var i = 0; i < previousDonationDates.length; i++) {
+        var date = new Date(previousDonationDates[i]);
+        $previousDonationDates.append('<li>' + date.toLocaleDateString() + '</li>');
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
+
