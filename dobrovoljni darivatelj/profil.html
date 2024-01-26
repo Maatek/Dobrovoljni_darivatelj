@@ -95,7 +95,7 @@
       width: 100%;
     }
 
-    /* Stilizacija za skočni prozor s informacijama */
+    /* skočni prozor */
     #infoButton {
       position: fixed;
       top: 20px;
@@ -131,7 +131,7 @@
       color: #e74c3c;
     }
 
-    /* Dodano zatvaranje klikom van prozora */
+    /* zatvaranje skocnog*/
     #infoModalClose {
       position: absolute;
       top: 10px;
@@ -141,11 +141,11 @@
       cursor: pointer;
     }
   </style>
-  <!-- jQuery -->
+ 
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <!-- Date.js -->
+ 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
-  <!-- Tawk.to live chat -->
+  
   <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     (function(){
@@ -285,7 +285,7 @@
   &copy; 2024 Doniraj Krv - Spasi Život | Posjetite <a href="https://www.hck.hr/" target="_blank">Hrvatski Crveni križ</a>
 </footer>
 
-<!-- Gumb i skočni prozor s informacijama -->
+<!-- Gumb i skočni prozor  -->
 <div id="infoButton">Informacije</div>
 
 <div id="infoModal">
@@ -306,7 +306,7 @@
     <p><strong>Treba li se nakon davanja krvi nešto pojesti i popiti?</strong></p>
     <p>Uobičajeno je nakon davanja krvi osvježiti se laganim obrokom i bezalkoholnim pićem. Tijekom tog vremena davatelj krvi je pod nadzorom djelatnika ili volonterima Crvenog križa.</p>
 
-    <!-- Dodano zatvaranje klikom van prozora -->
+    
     <div style="text-align: right; margin-top: 20px; cursor: pointer;" onclick="document.getElementById('infoModal').style.display='none';">Zatvori</div>
   </div>
 </div>
@@ -315,25 +315,20 @@
   $(document).ready(function() {
     var lastDonationDate;
     
-    // Dohvati prethodne datume iz lokalne pohrane
     var previousDonationDates = JSON.parse(localStorage.getItem('donationDates')) || [];
-
-    // Prikazi prethodne datume
+    
     displayPreviousDonationDates();
 
     $('form').submit(function(e) {
       e.preventDefault();
 
-      // Dohvati odabrani datum
+      
       var selectedDate = new Date($('#donationDate').val());
-
-      // Spremi datum zadnjeg darivanja
+      
       lastDonationDate = selectedDate;
 
-      // Dodaj datum u listu prethodnih datuma
       previousDonationDates.push(selectedDate.toISOString());
       
-      // Spremi listu prethodnih datuma u lokalnu pohranu
       localStorage.setItem('donationDates', JSON.stringify(previousDonationDates));
 
       // Prikazi datum sljedećeg darivanja
@@ -344,12 +339,11 @@
       displayPreviousDonationDates();
     });
 
-    // Prikazi skočni prozor s informacijama
+    // skočni prozor
     $('#infoButton').click(function() {
       $('#infoModal').css('display', 'block');
     });
 
-    // Zatvaranje skočnog prozora klikom van prozora
     $(window).click(function(event) {
       var modal = document.getElementById('infoModal');
       if (event.target === modal) {
